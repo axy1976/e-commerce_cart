@@ -1,0 +1,138 @@
+let username = 'ABC'
+let isLoggedIn = false 
+
+function CheckLogin() {
+  return (
+    <div>
+    <div>
+      <div class="container-fluid jumbotron rounded-0 text-center bg-colord mb-0">
+        <h1 class="colorl">e-commerce cart</h1>
+      </div>
+      <div class="bg-colorl">
+        <nav class="container navbar navbar-expand-lg navbar-light colord bg-transparent">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacts</a>
+              </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+              <a href="" class="colord mr-4"><b>Cart</b></a>
+              <button class="btn bg-colord colorl btn-md">Logout</button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-fluid content bg-colord">
+      <div class="container p-5 colorl">
+        <h5>All Products</h5>
+        <div class="m-3 row">
+          <div class="col-md-9">
+            <div class="row">
+              <div class="card col-md-3 m-4">
+                <div class="card-image">
+                  <img src="https://m.media-amazon.com/images/I/51FKBDpXEqL.jpg" height="180" width="100%"/>
+                </div>
+                <div class="card-header text-center colord bg-transparent">
+                  Aurdino (UNO)
+                </div>
+                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
+              </div>
+
+              <div class="card col-md-3 m-4">
+                <div class="card-image">
+                  <img src="https://m.media-amazon.com/images/I/81xhxQ7qCbL._SX679_.jpg" height="180" width="100%"/>
+                </div>
+                <div class="card-header text-center colord bg-transparent">
+                  NIC
+                </div>
+                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
+              </div>
+
+              <div class="card col-md-3 m-4">
+                <div class="card-image">
+                  <img src="https://m.media-amazon.com/images/I/61-0HSm+zeL._SL1200_.jpg" height="180" width="100%"/>
+                </div>
+                <div class="card-header text-center colord bg-transparent">
+                  Cabinet
+                </div>
+                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
+              </div>
+
+              <div class="card col-md-3 m-4">
+                <div class="card-image">
+                  <img src="https://m.media-amazon.com/images/I/818fDro1x9L._SL1500_.jpg" height="180" width="100%"/>
+                </div>
+                <div class="card-header text-center colord bg-transparent">
+                  Motherboard
+                </div>
+                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
+              </div>
+
+              <div class="card col-md-3 m-4">
+              <div class="card-image">
+                <img src="https://m.media-amazon.com/images/I/51p2d9NML5L._SL1000_.jpg" height="180" width="100%"/>
+              </div>
+              <div class="card-header text-center colord bg-transparent">
+                Router
+              </div>
+              <button class="btn bg-colord colorl mb-2">Add To Cart</button>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-3 mt-4">
+            <div class="rounded-2 card p-2 colord">
+              <h5>Cart</h5>
+              <div class="cart-menu border border-">
+                
+              </div>
+              <div class="border-0 border-bottom-1">
+                <table>
+                  <tr>
+                    <td>Gross Amount</td>
+                    <td>:</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Tax Amount</td>
+                    <td>:</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Shipping Amount</td>
+                    <td>:</td>
+                    <td>0</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-3 text-center bg-colorl">
+      <span>Assignment 7 [ Akshay Jangir ] </span>
+      <span class="bg-colord p-2 rounded">😁 😎 🔥</span>
+    </div>
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <CheckLogin />,
+  document.getElementById('root')
+);

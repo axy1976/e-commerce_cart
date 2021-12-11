@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300&display=swap');
+*{
+  font-family: 'Josefin Sans', sans-serif;
+}
+.bg-colord{
+  background-color:#041C32;
+}
+.bg-colorm{
+  background-color:#04293A;
+}
+.bg-colorl{
+  background-color:#ECB365;
+}
+.colord{
+color:#041C32;
+}
+.colorm{
+color:#064663;
+}
+.colorl{
+color:#ECB365;
+}
+a:hover{
+  text-decoration:none;
+}
