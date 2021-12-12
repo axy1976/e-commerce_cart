@@ -1,138 +1,236 @@
-let username = 'ABC'
-let isLoggedIn = false 
-
-function CheckLogin() {
+function Cartx() {
+  React.useEffect(() => {});
+  let totalamount = 0;
+  let cartItems = 0;
+  const [total, setTotal] = React.useState({
+    totalQty: 0,
+    totalPrice: 0
+  });
+  const [data, setdata] = React.useState([
+    {
+      productName: "Aurdino (UNO)",
+      productUrl: "https://m.media-amazon.com/images/I/51FKBDpXEqL.jpg",
+      productQty: 0,
+      productPrice: 560,
+      productTotal: 0
+    },
+    {
+      productName: "NIC",
+      productUrl: "https://m.media-amazon.com/images/I/81xhxQ7qCbL._SX679_.jpg",
+      productQty: 0,
+      productPrice: 210,
+      productTotal: 0
+    },
+    {
+      productName: "Cabinet",
+      productUrl: "https://m.media-amazon.com/images/I/61-0HSm+zeL._SL1200_.jpg",
+      productQty: 0,
+      productPrice: 2990,
+      productTotal: 0
+    },
+    {
+      productName: "Motherboard",
+      productUrl: "https://m.media-amazon.com/images/I/818fDro1x9L._SL1500_.jpg",
+      productQty: 0,
+      productPrice: 7980,
+      productTotal: 0
+    },
+    {
+      productName: "Router",
+      productUrl: "https://m.media-amazon.com/images/I/51p2d9NML5L._SL1000_.jpg",
+      productQty: 0,
+      productPrice: 3450,
+      productTotal: 0
+    },
+    {
+      productName: "Ram",
+      productUrl: "https://m.media-amazon.com/images/I/51eb3VQyt4L._SL1000_.jpg",
+      productQty: 0,
+      productPrice: 13150,
+      productTotal: 0
+    }
+  ]);
+  const totalQtyAndPrice = () => {
+    let qty = 0,
+      price = 0;
+    data.map(
+      (item) => (
+        (qty = qty + item.productQty), (price = price + item.productTotal)
+      )
+    );
+    setTotal({ totalQty: qty, totalPrice: price });
+  };
+  const [eComList, setEComList] = React.useState(data);
+  const Inc = (index) => {
+    data[index].productQty = data[index].productQty + 1;
+    data[index].productTotal =
+      data[index].productPrice * data[index].productQty;
+    setEComList(data);
+    setdata(eComList);
+    totalQtyAndPrice();
+  };
+  const Drc = (index) => {
+    if (data[index].productQty > 0) {
+      data[index].productQty = data[index].productQty - 1;
+      data[index].productTotal =
+        data[index].productPrice * data[index].productQty;
+      setEComList(data);
+      setdata(eComList);
+      totalQtyAndPrice();
+    }
+  };
+  const cartList = (index) => {
+    if(data[index].productQty > 0) {
+      return (
+        <tr>
+          <td><span class="text-truncate">{data[index].productName}</span><br/>
+            <button class="btn btn-sm bg-colord colorl" onClick={() => { Inc(index); }}>+</button> {data[index].productQty} <button class="btn btn-sm bg-colord colorl" onClick={() => { Drc(index); }}>-</button></td>
+          <td class="text-right w-25">{data[index].productTotal}.00</td>
+        </tr>
+      );
+    }
+  };
+  const billing = () => {
+    let grossamount = 0;
+    let taxamount = 0;
+    data.map(
+      (item) => (
+        (grossamount = grossamount + item.productTotal)
+      )
+    );
+    let tempx = grossamount;
+    grossamount = (grossamount).toFixed(2);
+    taxamount = ( grossamount * 18 ) / 100;
+    let tempy = taxamount;
+    taxamount = (Math.round((taxamount + Number.EPSILON) * 100) / 100).toFixed(2);
+    totalamount = tempx + tempy;
+    if(cartItems > 0){
+      totalamount = totalamount + 40;
+    }
+    totalamount = totalamount.toFixed(2);
+    return (
+      <table>
+        <tr>
+          <td>Gross Amount</td>
+          <td>:</td>
+          <td class="w-25 text-right">{grossamount}</td>
+        </tr>
+        <tr>
+          <td>Tax Amount (18%)</td>
+          <td>:</td>
+          <td class="w-25 text-right">{taxamount}</td>
+        </tr>
+        <tr>
+          <td>Shipping Amount</td>
+          <td>:</td>
+          <td class="w-25 text-right">40.00</td>
+        </tr>
+      </table>
+    );
+  }
+  const cartCounter = () => {
+    data.map((item) => {
+      if(item.productQty > 0){
+        cartItems = cartItems + 1;
+      }
+    });
+    return cartItems;
+  }
   return (
     <div>
-    <div>
-      <div class="container-fluid jumbotron rounded-0 text-center bg-colord mb-0">
-        <h1 class="colorl">e-commerce cart</h1>
+      <div>
+        <div class="container-fluid jumbotron rounded-0 text-center bg-colord mb-0">
+          <h1 class="colorl">e-commerce cart</h1>
+        </div>
+        <div class="bg-colorl">
+          <nav class="container navbar navbar-expand-lg navbar-light colord bg-transparent">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Contacts</a>
+                </li>
+              </ul>
+              <div class="form-inline my-2 my-lg-0">
+                <a href="#" class="colord mr-4"><b>Cart <span class="badge bg-colord colorl">{cartCounter()}</span></b></a>
+                <button class="btn bg-colord colorl btn-md">Logout</button>
+              </div>
+            </div>
+          </nav>
+        </div>
       </div>
-      <div class="bg-colorl">
-        <nav class="container navbar navbar-expand-lg navbar-light colord bg-transparent">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Products</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contacts</a>
-              </li>
-            </ul>
-            <div class="form-inline my-2 my-lg-0">
-              <a href="" class="colord mr-4"><b>Cart</b></a>
-              <button class="btn bg-colord colorl btn-md">Logout</button>
+      <div class="container-fluid content bg-colord">
+        <div class="container p-5 colorl">
+          <h5>All Products</h5>
+          <div class="m-3 row">
+            <div class="col-md-9">
+              <div class="row">
+                {data.map((item, index) => (
+                  <div class="card col-md-3 m-4">
+                    <div class="card-image">
+                      <img src={item.productUrl} height="180" width="100%"/>
+                    </div>
+                    <div class="card-header text-center colord bg-transparent">
+                      {item.productName}
+                      <br/>
+                      Price : {item.productPrice}.00
+                    </div>
+                    <button class="btn bg-colord colorl mb-2" onClick={() => { Inc(index); }}>Add To Cart</button>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-    <div class="container-fluid content bg-colord">
-      <div class="container p-5 colorl">
-        <h5>All Products</h5>
-        <div class="m-3 row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="card col-md-3 m-4">
-                <div class="card-image">
-                  <img src="https://m.media-amazon.com/images/I/51FKBDpXEqL.jpg" height="180" width="100%"/>
+            <div class="col-md-3 mt-4">
+              <div class="rounded-2 card p-2 colord">
+                <h5>Cart</h5>
+                <div class="border"></div>
+                <div class="cart-menu">  
+                  <table>
+                    {data.map((item, index) => (
+                      cartList(index)
+                    ))}
+                  </table>
                 </div>
-                <div class="card-header text-center colord bg-transparent">
-                  Aurdino (UNO)
+                <div class="border"></div>
+                <div class="">
+                  {billing()}
                 </div>
-                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
-              </div>
-
-              <div class="card col-md-3 m-4">
-                <div class="card-image">
-                  <img src="https://m.media-amazon.com/images/I/81xhxQ7qCbL._SX679_.jpg" height="180" width="100%"/>
+                <div class="border"></div>
+                <div class="">
+                  <table>
+                    <tr>
+                      <td>Total Amount</td>
+                      <td class="w-25 text-right">:</td>
+                      <td class="w-25 text-right">{totalamount}</td>
+                    </tr>
+                  </table>
                 </div>
-                <div class="card-header text-center colord bg-transparent">
-                  NIC
-                </div>
-                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
-              </div>
-
-              <div class="card col-md-3 m-4">
-                <div class="card-image">
-                  <img src="https://m.media-amazon.com/images/I/61-0HSm+zeL._SL1200_.jpg" height="180" width="100%"/>
-                </div>
-                <div class="card-header text-center colord bg-transparent">
-                  Cabinet
-                </div>
-                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
-              </div>
-
-              <div class="card col-md-3 m-4">
-                <div class="card-image">
-                  <img src="https://m.media-amazon.com/images/I/818fDro1x9L._SL1500_.jpg" height="180" width="100%"/>
-                </div>
-                <div class="card-header text-center colord bg-transparent">
-                  Motherboard
-                </div>
-                <button class="btn bg-colord colorl mb-2">Add To Cart</button>
-              </div>
-
-              <div class="card col-md-3 m-4">
-              <div class="card-image">
-                <img src="https://m.media-amazon.com/images/I/51p2d9NML5L._SL1000_.jpg" height="180" width="100%"/>
-              </div>
-              <div class="card-header text-center colord bg-transparent">
-                Router
-              </div>
-              <button class="btn bg-colord colorl mb-2">Add To Cart</button>
-            </div>
-            </div>
-          </div>
-          <div class="col-md-3 mt-4">
-            <div class="rounded-2 card p-2 colord">
-              <h5>Cart</h5>
-              <div class="cart-menu border border-">
-                
-              </div>
-              <div class="border-0 border-bottom-1">
-                <table>
-                  <tr>
-                    <td>Gross Amount</td>
-                    <td>:</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>Tax Amount</td>
-                    <td>:</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <td>Shipping Amount</td>
-                    <td>:</td>
-                    <td>0</td>
-                  </tr>
-                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="p-3 text-center bg-colorl">
-      <span>Assignment 7 [ Akshay Jangir ] </span>
-      <span class="bg-colord p-2 rounded">😁 😎 🔥</span>
-    </div>
+      <div class="p-3 text-center bg-colorl">
+        <span>Assignment 7 [ Akshay Jangir ] </span>
+        <span class="bg-colord p-2 rounded">😁 😎 🔥</span>
+      </div>
     </div>
   )
 }
 
 ReactDOM.render(
-  <CheckLogin />,
+  <Cartx />,
   document.getElementById('root')
 );
